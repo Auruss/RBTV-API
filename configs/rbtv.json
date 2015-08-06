@@ -1,0 +1,71 @@
+{
+  "http": {
+    "authTokenHeader": "X-RocketBeans-AuthToken",
+    "prettyResponse": true
+  },
+
+  "network": {
+    "port": 13337
+  },
+
+  "orm": {
+    "core": {
+      "dialect": "mysql",
+      "host": "127.0.0.1",
+      "port": 3306,
+      "user": "apiuser",
+      "password": "",
+      "database": "rbtv_db"
+    }
+  },
+
+  "elasticSearch": {
+    "logstash": {
+      "host": "127.0.0.1:9200",
+      "index": "api-rbtv-logstash"
+    },
+    "metrics": {
+      "host": "127.0.0.1:9200",
+      "index": "api-rbtv-metrics"
+    }
+  },
+
+  "redis": {
+    "cache": {
+      "host": "127.0.0.1",
+      "port": 6379,
+      "ipv": 4,
+      "password": "",
+      "database": 0
+    }
+  },
+
+  "cache": {
+    "default": {
+      "engine": { "type": "redis", "config": "cache" },
+      "ttl": 120,
+      "prefix": "rbtv_default_"
+    }
+  },
+
+  "logging": {
+    "pm2": [],
+    "logstash": ["debug", "error", "info", "warning"]
+  },
+
+  "schedule": {
+    "crawl-show-info": {
+      "job": "showinfo_webcrawler",
+      "minutes": 1440,
+      "key": "superadmin",
+      "engine": "phantomjs"
+    },
+    "get-sendeplan": {
+      "job": "sendeplan_appapi",
+      "minutes": 60,
+      "key": "superadmin",
+      "engine": "node"
+    }
+  }
+
+}
